@@ -1,19 +1,32 @@
 ---
 output: rmarkdown::github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 # indialights
 
+Tools to Work with the 'India Lights' 'API'
+
 ## Description
+
+The 'India Lights' 'API' shows light output at night for 20 years, from 1993 to 2013, for 600,000 villages across India. The 'Defense Meteorological Satellite Program' ('DMSP'), run by the 'U.S.' 'Department of Defense', has taken pictures of the Earth every night for 20 years. Researchers at the 'University of Michigan' used the 'DMSP' images to extract the data and provide it in tabular form. The 'India Lights' 'API' provides the data at convenient endpoints that allows you to look at specific time intervals and administration levels. Tools are provided to query these 'API' endpoints.
 
 ## What's Inside The Tin
 
 The following functions are implemented:
 
+- `ial_district`:	Time series for a single district
+- `ial_districts`:	Time series for all districts in a state
+- `ial_regions`:	List of all the regions (districts) with display name and id
+- `ial_state`:	Time series for a single state
+- `ial_states`:	Time series for all states in the nation
+- `ial_villages`:	Time series for comma separated list of villages
+
 ## Installation
 
 ```{r eval=FALSE}
-devtools::install_github("hrbrmstr/indialights")
+devtools::install_git("https://gitlab.com/hrbrmstr/indialights.git")
 ```
 
 ```{r message=FALSE, warning=FALSE, error=FALSE, include=FALSE}
@@ -24,9 +37,68 @@ options(width=120)
 
 ```{r message=FALSE, warning=FALSE, error=FALSE}
 library(indialights)
+library(tidyverse)
 
 # current verison
 packageVersion("indialights")
 
 ```
 
+### The examples from <http://api.nightlights.io/>
+
+Time series for a single district:
+
+```{r}
+ial_district("gujarat-anand", "1993.3", "1993.4")
+```
+
+Time series for all districts in a state:
+
+```{r}
+ial_state(
+  state_id = "gujarat", 
+  interval_start = "1993.3", 
+  interval_stop = "1993.4"
+)
+```
+
+List of all the regions (districts) with display name and id:
+
+**NOTE THIS ENDPOINT ON THEIR SERVER IS BROKEN**
+
+```{r error=TRUE}
+ial_regions()
+```
+
+Time series for all states in the nation:
+
+```{r}
+ial_states(
+  interval_start = "1993-03-01",
+  interval_stop = "1993-04-01"
+)
+```
+
+Time series for the given state:
+
+```{r}
+ial_state(
+  state_id = "gujarat",
+  interval_start = as.Date("1993-03-01"),
+  interval_stop = as.Date("1993-04-01")
+)
+```
+
+Time series for comma separated list of villages:
+
+```{r}
+ial_villages(
+  village_ids = c("104000100132900", "104000200153500", "108000200308200"),
+  interval_start = "1993.3", 
+  interval_stop = "1993.4"
+)
+```
+
+## Code of Conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.

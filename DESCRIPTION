@@ -1,6 +1,6 @@
 Package: indialights
 Type: Package
-Title: indialights title goes here otherwise CRAN checks fail
+Title: Tools to Work with the 'India Lights' 'API'
 Version: 0.1.0
 Date: 2018-09-30
 Authors@R: c(
@@ -8,11 +8,18 @@ Authors@R: c(
            comment = c(ORCID = "0000-0001-5670-2640"))
   )
 Maintainer: Bob Rudis <bob@rud.is>
-Description: A good description goes here otherwise CRAN checks fail.
+Description: The 'India Lights' 'API' shows light output at night for 20 years, 
+    from 1993 to 2013, for 600,000 villages across India. The 'Defense Meteorological 
+    Satellite Program' ('DMSP'), run by the 'U.S.' 'Department of Defense', has 
+    taken pictures of the Earth every night for 20 years. Researchers at the 
+    'University of Michigan' used the 'DMSP' images to extract the data and provide 
+    it in tabular form. The 'India Lights' 'API' provides the data at convenient 
+    endpoints that allows you to look at specific time intervals and administration 
+    levels. Tools are provided to query these 'API' endpoints.
 URL: https://gitlab.com/hrbrmstr/indialights
 BugReports: https://gitlab.com/hrbrmstr/indialights/issues
 Encoding: UTF-8
-License: AGPL
+License: MIT + file LICENSE
 Suggests:
     testthat,
     covr
